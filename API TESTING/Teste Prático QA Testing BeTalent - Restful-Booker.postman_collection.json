@@ -1,0 +1,1395 @@
+{
+	"info": {
+		"_postman_id": "139f1d92-7002-4f0d-b1a7-ca9676a92844",
+		"name": "Teste Prático QA Testing BeTalent - Restful-Booker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38653607"
+	},
+	"item": [
+		{
+			"name": "Criação de token",
+			"item": [
+				{
+					"name": "Create Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonResponse = pm.response.json();\r",
+									"\r",
+									"// Captura o token do corpo da resposta\r",
+									"let token = jsonResponse.token;  // 'token' é a chave no JSON\r",
+									"\r",
+									"// Verifica se o token foi recuperado com sucesso\r",
+									"if (token) {\r",
+									"    console.log('Token capturado:', token);\r",
+									"    // Salva o token na variável da coleção\r",
+									"    pm.collectionVariables.set('auth_token', token);  // Salva na coleção\r",
+									"} else {\r",
+									"    console.log('Token não encontrado no corpo da resposta');\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\" : \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\" : \"password123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/auth",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1732636016&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=Y82tlmCnd9n%2FF%2FDe%2F9brA7TqeHUoU%2BxXjUvyrPZbIvE%3D\"}]}"
+								},
+								{
+									"key": "Reporting-Endpoints",
+									"value": "heroku-nel=https://nel.heroku.com/reports?ts=1732636016&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=Y82tlmCnd9n%2FF%2FDe%2F9brA7TqeHUoU%2BxXjUvyrPZbIvE%3D"
+								},
+								{
+									"key": "Nel",
+									"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"1b-N7zlNvk12g8T+FqTxV+KgoOB5JU\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 26 Nov 2024 15:46:56 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"60cce973393a6b6\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Busca reservas",
+			"item": [
+				{
+					"name": "All Id's",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/booking",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking ID by first Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/booking?firstname=Givanildo",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "Givanildo"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking ID by last Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/booking?lastname=Oseias",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "sally",
+									"disabled": true
+								},
+								{
+									"key": "lastname",
+									"value": "Oseias"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking ID by checkin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/booking?checkin=2025-09-26",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking"
+							],
+							"query": [
+								{
+									"key": "checkout",
+									"value": "2014-05-21",
+									"disabled": true
+								},
+								{
+									"key": "firstname",
+									"value": "sally",
+									"disabled": true
+								},
+								{
+									"key": "lastname",
+									"value": "brown",
+									"disabled": true
+								},
+								{
+									"key": "checkin",
+									"value": "2025-09-26"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking ID by checkout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/booking?checkout=2025-10-02",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking"
+							],
+							"query": [
+								{
+									"key": "checkin",
+									"value": "2014-03-13",
+									"disabled": true
+								},
+								{
+									"key": "checkout",
+									"value": "2025-10-02"
+								},
+								{
+									"key": "firstname",
+									"value": "sally",
+									"disabled": true
+								},
+								{
+									"key": "lastname",
+									"value": "brown",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/booking/2106",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking",
+								"2106"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Criar reserva",
+			"item": [
+				{
+					"name": "Create Booking",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\" : \"Ignácio\",\r\n    \"lastname\" : \"Antonio\",\r\n    \"totalprice\" : 1967,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2026-09-26\",\r\n        \"checkout\" : \"2025-10-02\"\r\n    },\r\n    \"additionalneeds\" : \"Parking\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/booking",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Booking",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstname\" : \"Jurandir\",\r\n    \"lastname\" : \"Almeida\",\r\n    \"totalprice\" : 715,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2024-12-01\",\r\n        \"checkout\" : \"2024-12-03\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/booking",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"booking"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1732639365&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=CepSMeNMGYn2aHg1Q2omn2mDPk60%2F58KxYlATM6tKf0%3D\"}]}"
+								},
+								{
+									"key": "Reporting-Endpoints",
+									"value": "heroku-nel=https://nel.heroku.com/reports?ts=1732639365&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=CepSMeNMGYn2aHg1Q2omn2mDPk60%2F58KxYlATM6tKf0%3D"
+								},
+								{
+									"key": "Nel",
+									"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "204"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"cc-Zjt74YOM+dk0qSXbRzdAPrht3wM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 26 Nov 2024 16:42:45 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"bookingid\": 1233,\n    \"booking\": {\n        \"firstname\": \"Jurandir\",\n        \"lastname\": \"Almeida\",\n        \"totalprice\": 715,\n        \"depositpaid\": true,\n        \"bookingdates\": {\n            \"checkin\": \"2024-12-01\",\n            \"checkout\": \"2024-12-03\"\n        },\n        \"additionalneeds\": \"Breakfast\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Booking sem data checkin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\" : \"Aldmemir\",\r\n    \"lastname\" : \"Almeida\",\r\n    \"totalprice\" : 715,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : {\r\n        \"checkout\" : \"2024-12-07\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/booking",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Booking sem data checkin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstname\" : \"Aldmemir\",\r\n    \"lastname\" : \"Almeida\",\r\n    \"totalprice\" : 715,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : {\r\n        \"checkout\" : \"2024-12-07\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/booking",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"booking"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1732639704&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=4pD0YArke4Li88g%2BvHFKbI7p%2B4wUNouIZ006mGR6iYk%3D\"}]}"
+								},
+								{
+									"key": "Reporting-Endpoints",
+									"value": "heroku-nel=https://nel.heroku.com/reports?ts=1732639704&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=4pD0YArke4Li88g%2BvHFKbI7p%2B4wUNouIZ006mGR6iYk%3D"
+								},
+								{
+									"key": "Nel",
+									"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "21"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"15-/6VXivhc2MKdLfIkLcUE47K6aH0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 26 Nov 2024 16:48:24 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "Internal Server Error"
+						},
+						{
+							"name": "Create Booking com data inválida",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstname\" : \"Aldmemir\",\r\n    \"lastname\" : \"Almeida\",\r\n    \"totalprice\" : 715,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2024-12-01\",\r\n        \"checkout\" : \"abcdef\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/booking",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"booking"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1732640339&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=sLZdMHmMuN3t1sOXYlrJgUkJpbHq9TP0c7cyFoOqMoU%3D\"}]}"
+								},
+								{
+									"key": "Reporting-Endpoints",
+									"value": "heroku-nel=https://nel.heroku.com/reports?ts=1732640339&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=sLZdMHmMuN3t1sOXYlrJgUkJpbHq9TP0c7cyFoOqMoU%3D"
+								},
+								{
+									"key": "Nel",
+									"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "204"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"cc-WOnWncWkQbnaGYLtImmoodYGRsA\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 26 Nov 2024 16:58:59 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"bookingid\": 4308,\n    \"booking\": {\n        \"firstname\": \"Aldmemir\",\n        \"lastname\": \"Almeida\",\n        \"totalprice\": 715,\n        \"depositpaid\": true,\n        \"bookingdates\": {\n            \"checkin\": \"2024-12-01\",\n            \"checkout\": \"0NaN-aN-aN\"\n        },\n        \"additionalneeds\": \"Breakfast\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Alterar reserva",
+			"item": [
+				{
+					"name": "Update Booking",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token={{auth_token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token=1234lk",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\" : \"Aldemir\",\r\n    \"lastname\" : \"Raimundo\",\r\n    \"totalprice\" : 240,\r\n    \"depositpaid\" : false,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2025-04-01\",\r\n        \"checkout\" : \"2025-04-05\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/booking/5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking",
+								"5"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Booking",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "token={{auth_token}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "{{Authorization}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "token=59a219ffe639771",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstname\" : \"Jurandir\",\r\n    \"lastname\" : \"Almeida\",\r\n    \"totalprice\" : 978,\r\n    \"depositpaid\" : true,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2025-01-01\",\r\n        \"checkout\" : \"2025-01-03\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/booking/2242",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"booking",
+										"2242"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1732640819&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=YSKRXxXYQUWDDTX2ouFU%2FYawTwJGVFvqClhh%2BW%2B2w84%3D\"}]}"
+								},
+								{
+									"key": "Reporting-Endpoints",
+									"value": "heroku-nel=https://nel.heroku.com/reports?ts=1732640819&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=YSKRXxXYQUWDDTX2ouFU%2FYawTwJGVFvqClhh%2BW%2B2w84%3D"
+								},
+								{
+									"key": "Nel",
+									"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "175"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"af-hwtLNFcZO9t5DCxiVImn0/cRvAs\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 26 Nov 2024 17:06:59 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"firstname\": \"Jurandir\",\n    \"lastname\": \"Almeida\",\n    \"totalprice\": 978,\n    \"depositpaid\": true,\n    \"bookingdates\": {\n        \"checkin\": \"2025-01-01\",\n        \"checkout\": \"2025-01-03\"\n    },\n    \"additionalneeds\": \"Breakfast\"\n}"
+						},
+						{
+							"name": "Update Booking com autent. cookie",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "token={{auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{Authorization}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Cookie",
+										"value": "token=59a219ffe639771",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstname\" : \"Aldemir\",\r\n    \"lastname\" : \"Raimundo\",\r\n    \"totalprice\" : 240,\r\n    \"depositpaid\" : false,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2025-04-01\",\r\n        \"checkout\" : \"2025-04-05\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/booking/5",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"booking",
+										"5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1732641406&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=5hQoaf5CIZraJE6Ox7qJeCre%2BtD%2BegwldCKJIOLP%2FKY%3D\"}]}"
+								},
+								{
+									"key": "Reporting-Endpoints",
+									"value": "heroku-nel=https://nel.heroku.com/reports?ts=1732641406&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=5hQoaf5CIZraJE6Ox7qJeCre%2BtD%2BegwldCKJIOLP%2FKY%3D"
+								},
+								{
+									"key": "Nel",
+									"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "176"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"b0-HqBIHqpvO4D8tXcOSg/ENIwIe2Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 26 Nov 2024 17:16:46 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"firstname\": \"Aldemir\",\n    \"lastname\": \"Raimundo\",\n    \"totalprice\": 240,\n    \"depositpaid\": false,\n    \"bookingdates\": {\n        \"checkin\": \"2025-04-01\",\n        \"checkout\": \"2025-04-05\"\n    },\n    \"additionalneeds\": \"Breakfast\"\n}"
+						},
+						{
+							"name": "Update Booking com token inválido",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "token={{auth_token}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "{{Authorization}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Cookie",
+										"value": "token=1234lk",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstname\" : \"Aldemir\",\r\n    \"lastname\" : \"Raimundo\",\r\n    \"totalprice\" : 240,\r\n    \"depositpaid\" : false,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2025-04-01\",\r\n        \"checkout\" : \"2025-04-05\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/booking/5",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"booking",
+										"5"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1732641646&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=6iE9bcTwtZOo3CO4oecmXTcepPWqX%2FHMPw1MV15032k%3D\"}]}"
+								},
+								{
+									"key": "Reporting-Endpoints",
+									"value": "heroku-nel=https://nel.heroku.com/reports?ts=1732641646&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=6iE9bcTwtZOo3CO4oecmXTcepPWqX%2FHMPw1MV15032k%3D"
+								},
+								{
+									"key": "Nel",
+									"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"9-PatfYBLj4Um1qTm5zrukoLhNyPU\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 26 Nov 2024 17:20:46 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "Forbidden"
+						},
+						{
+							"name": "Update Booking sem autenticação",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "token={{auth_token}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "{{Authorization}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Cookie",
+										"value": "token=1234lk",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstname\" : \"Aldemir\",\r\n    \"lastname\" : \"Raimundo\",\r\n    \"totalprice\" : 240,\r\n    \"depositpaid\" : false,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2025-04-01\",\r\n        \"checkout\" : \"2025-04-05\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/booking/5",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"booking",
+										"5"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1732642052&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=7Z1%2F8XAEomWTgnqBOobFPklD9ZhL2rDBtloHfhzCBvM%3D\"}]}"
+								},
+								{
+									"key": "Reporting-Endpoints",
+									"value": "heroku-nel=https://nel.heroku.com/reports?ts=1732642052&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=7Z1%2F8XAEomWTgnqBOobFPklD9ZhL2rDBtloHfhzCBvM%3D"
+								},
+								{
+									"key": "Nel",
+									"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"9-PatfYBLj4Um1qTm5zrukoLhNyPU\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 26 Nov 2024 17:27:32 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "Forbidden"
+						}
+					]
+				},
+				{
+					"name": "Update Booking com formato inválido",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token={{auth_token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token=1234lk",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\" : 12345,\r\n    \"lastname\" : \"Raimundo\",\r\n    \"totalprice\" : 240,\r\n    \"depositpaid\" : false,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"abcdef\",\r\n        \"checkout\" : \"2025-04-05\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/booking/5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking",
+								"5"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Booking com formato inválido",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "token={{auth_token}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "{{Authorization}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "token=1234lk",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstname\" : 12345,\r\n    \"lastname\" : \"Raimundo\",\r\n    \"totalprice\" : 240,\r\n    \"depositpaid\" : false,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"abcdef\",\r\n        \"checkout\" : \"2025-04-05\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/booking/5",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"booking",
+										"5"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1732642270&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=V5nRCeZW9MfjS%2BukxSfHyhm4xuO6hLk%2BUOqCXQG8f1Y%3D\"}]}"
+								},
+								{
+									"key": "Reporting-Endpoints",
+									"value": "heroku-nel=https://nel.heroku.com/reports?ts=1732642270&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=V5nRCeZW9MfjS%2BukxSfHyhm4xuO6hLk%2BUOqCXQG8f1Y%3D"
+								},
+								{
+									"key": "Nel",
+									"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "21"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"15-/6VXivhc2MKdLfIkLcUE47K6aH0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 26 Nov 2024 17:31:10 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "Internal Server Error"
+						}
+					]
+				},
+				{
+					"name": "Update Booking com ID inválido",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token={{auth_token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token=1234lk",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\" : \"Aldemir\",\r\n    \"lastname\" : \"Raimundo\",\r\n    \"totalprice\" : 240,\r\n    \"depositpaid\" : false,\r\n    \"bookingdates\" : {\r\n        \"checkin\" : \"2025-04-01\",\r\n        \"checkout\" : \"2025-04-05\"\r\n    },\r\n    \"additionalneeds\" : \"Breakfast\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/booking/abc",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking",
+								"abc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Partial Update Booking",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token={{auth_token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token=59a219ffe639771",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"totalprice\": 1675,\r\n    \"depositpaid\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/booking/9",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking",
+								"9"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Pasta com as requisições necessárias para alteração das reservas"
+		},
+		{
+			"name": "Apagar reserva",
+			"item": [
+				{
+					"name": "Delete Booking",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token={{auth_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Cookie",
+								"value": "token=59a219ffe639771",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/booking/15",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking",
+								"15"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://restful-booker.herokuapp.com",
+			"type": "string"
+		},
+		{
+			"key": "Authorization",
+			"value": "Basic YWRtaW46cGFzc3dvcmQxMjM=",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": ""
+		}
+	]
+}
